@@ -1,47 +1,18 @@
-var gulp = require('gulp'),
-    connect = require('gulp-connect');
-
 var slurpee = require('slurpee');
 
-slurpee.configure = {
-  cssFile: 'app.css',
-  indexFile: 'index.html',
-  jsFile: 'scripts/app.js',
-  jsPaths: ['scripts/*.js'],
-  jsRootPath: './js',
-  liveReloadPort: 35729,
-  outputDir: 'public/',
-  staticPath: undefined,
-  staticPort: 3000,
-  useBower: true
-}
+slurpee.config.cssFile = 'app.css';
+slurpee.config.indexFile = 'index.html';
+slurpee.config.jsFile = 'scripts/controller.js';
+slurpee.config.jsPaths = ['scripts/*.js'];
+slurpee.config.jsRootPath = './js';
+slurpee.config.liveReloadPort = 35729;
+slurpee.config.outputDir = './';
+slurpee.config.staticPath = undefined;
+slurpee.config.staticPort = 3000;
+slurpee.config.useBower = false;
 
-var paths = {
-  views: ['./*.html'],
-  scripts: ['./*/**.js']
-};
+slurpee.configure();
 
-gulp.task('connect', function() {
-  connect.server({
-    app:[__dirname],
-    port: 3000,
-    livereload: true
-  });
-});
+var gulp = require('gulp');
 
-gulp.task('html', function() {
-  gulp.src(paths.views)
-    .pipe(connect.reload());
-});
-
-gulp.task('scripts', function() {
-  gulp.src(paths.scripts)
-    .pipe(connect.reload());
-});
-
-gulp.task('watch', function () {
-  gulp.watch(paths.views, ['html']);
-  gulp.watch(paths.scripts, ['scripts']);
-});
-
-gulp.task('default', ['connect', 'scripts', 'html', 'watch']);
+gulp.task('default', ['build', 'watch']);
