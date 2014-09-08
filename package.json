@@ -6,10 +6,9 @@
     "start": "gulp"
   },
   "dependencies": {
-    "slurpee": "^0.1.4"
+    "slurpee": "git://github.com/rschmukler/slurpee.git"
   },
   "devDependencies": {
-    "gulp-connect": "~2.0.6",
     "gulp": "~3.8.7"
   }
 }
